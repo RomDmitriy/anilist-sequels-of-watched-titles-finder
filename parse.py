@@ -29,6 +29,7 @@ query = gql(
 						node {
 							id
 							averageScore
+							format
 							status
 							title {
 								romaji
@@ -64,11 +65,13 @@ for list in result:
 		
 print('Completed:', len(completedList))
 		
+allowedFormat = ['TV', 'TV_SHORT', 'MOVIE', 'SPECIAL', 'OVA', 'ONA']
+
 sequelEdgeList = dict()
 
 for anime in completedList.values():
 	for edge in anime['media']['relations']['edges']:
-		if edge['relationType'] == "SEQUEL" and edge['node']['status'] == 'FINISHED' and edge['node']['id'] not in completedList:
+		if edge['relationType'] == "SEQUEL" and edge['node']['status'] == 'FINISHED' and edge['node']['id'] not in completedList and edge['node']['format'] in allowedFormat:
 			sequelEdgeList[edge['node']['id']] = edge['node']
 
 print('Unwatched sequel (may be dublicates):', len(sequelEdgeList))
@@ -77,7 +80,7 @@ sideStoryEdgeList = dict()
 
 for anime in completedList.values():
 	for edge in anime['media']['relations']['edges']:
-		if edge['relationType'] == "SIDE_STORY" and edge['node']['status'] == 'FINISHED' and edge['node']['id'] not in completedList:
+		if edge['relationType'] == "SIDE_STORY" and edge['node']['status'] == 'FINISHED' and edge['node']['id'] not in completedList and edge['node']['format'] in allowedFormat:
 			sideStoryEdgeList[edge['node']['id']] = edge['node']
 
 print('Unwatched side-stories (may be dublicates):', len(sequelEdgeList))
