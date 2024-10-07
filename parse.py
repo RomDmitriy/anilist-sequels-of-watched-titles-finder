@@ -86,8 +86,8 @@ textFile = open(f'output_{name}.txt', 'w')
 
 textFile.write('Sequels:\n')
 for anime in sequelEdgeList.values():
-	textFile.write(f'\t{anime['title']['english'] or anime['title']['romaji']}\t-\thttps://anilist.co/anime/{anime['id']}/\tScore: {anime['averageScore'] or 'unknown'}%\n')
+	textFile.write(f'\t{anime['title']['english'] or anime['title']['romaji']} - https://anilist.co/anime/{anime['id']}/\tScore: {anime['averageScore'] or 'unknown'}%\n')
 
 textFile.write('\nSide-stories:\n')
 for anime in sideStoryEdgeList.values():
-	textFile.write(f'\t{anime['title']['english'] or anime['title']['romaji']}\t-\thttps://anilist.co/anime/{anime['id']}/\tScore: {anime['averageScore'] or 'unknown'}%\n')
+	textFile.write(f'\t{anime['title']['english'] or anime['title']['romaji']} - https://anilist.co/anime/{anime['id']}/\tScore: {anime['averageScore'] or 'unknown'}%\n')
